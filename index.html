@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parasited</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'VT323', monospace;
+            line-height: 1.6;
+            color: #ff71ce;
+            background-color: #0c0c2b;
+            background-image: linear-gradient(to bottom, #0c0c2b, #1c1c4b);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: backgroundMove 10s linear infinite;
+        }
+        @keyframes backgroundMove {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+        h1, h2 {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #01cdfe;
+            text-shadow: 2px 2px #ff71ce, -2px -2px #05ffa1;
+            animation: neon-flicker 5s infinite;
+        }
+        .card {
+            border: 2px solid #01cdfe;
+            border-radius: 0;
+            margin-bottom: 20px;
+            overflow: hidden;
+            background-color: rgba(1, 205, 254, 0.1);
+            box-shadow: 5px 5px 0px #ff71ce;
+            transition: all 0.3s ease;
+            animation: cardHover 0.5s ease;
+        }
+        @keyframes cardHover {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(10deg); }
+            100% { transform: rotateY(0deg); }
+        }
+        .card:hover {
+            transform: translate(-5px, -5px) rotate(2deg);
+            box-shadow: 10px 10px 0px #ff71ce;
+        }
+        .card-header {
+            background-color: #01cdfe;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #0c0c2b;
+        }
+        .card-content {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .card-image {
+            width: 110px;
+            height: 140px;
+            object-fit: cover;
+            border: 2px solid #ff71ce;
+            filter: saturate(150%) hue-rotate(30deg);
+            margin-right: 15px;
+            transition: transform 0.3s ease;
+        }
+        .card-image:hover {
+            transform: rotate(15deg);
+        }
+        .card-details {
+            flex-grow: 1;
+        }
+        .vote-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .vote-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            font-family: 'VT323', monospace;
+        }
+        .vote-button:hover {
+            transform: scale(1.2);
+        }
+        .upvote { color: #05ffa1; }
+        .downvote { color: #ff71ce; }
+        .expand { color: #01cdfe; }
+        .card-footer {
+            padding: 15px;
+            border-top: 2px solid #01cdfe;
+            display: none;
+            background-color: rgba(255, 113, 206, 0.1);
+        }
+        .tweet {
+            background-color: rgba(1, 205, 254, 0.2);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #01cdfe;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 2px solid #01cdfe;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #01cdfe;
+            color: #0c0c2b;
+        }
+        td {
+            background-color: rgba(1, 205, 254, 0.1);
+            color: #ff71ce;
+        }
+        @keyframes neon-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 2px 2px #ff71ce, -2px -2px #05ffa1;
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+        h1 {
+            animation: neon-flicker 5s infinite;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(1, 205, 254, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(1, 205, 254, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Most Likely to get Parasited</h1>
+    <h2>Power Rankings July</h2>
+    <div id="rankings"></div>
+
+    <h2>Ranked Choice Votes</h2>
+    <table id="votesTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>David Sacks</th>
+                <th>Bill Ackman</th>
+                <th>Marc Andressen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be added here by JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        const parasiteTargets = [
+            {
+                id: 1,
+                name: "David Sacks",
+                image: "./ds.jpg",
+                votes: 120,
+                tweet: "Do I even have to explain?",
+                description: "A semi-Piers Morgan- All the attention seeking None of the entertainment"
+            },
+            {
+                id: 2,
+                name: "Bill Ackman",
+                image: "./ba.jpg",
+                votes: 85,
+                tweet: "How is he so smart but can't just apply it for politics",
+                description: "Lazy screenwriter's reference for rich asshole"
+            },
+            {
+                id: 3,
+                name: "Marc Andressen",
+                image: "./ma.jpg",
+                votes: 65,
+                tweet: "WE MUST STARVE PEOPLE AND KEEP THE LIGHTS ON BECAUSE ACCELERATION",
+                description: "idk what he did but he does something every week that would put him up here"
+            },
+            {
+                id: 4,
+                name: "David Sacks",
+                image: "./ds.jpg",
+                votes: 50,
+                tweet: "I guess I'll explain: American gives opinion on something in another country without understanding how that country works as if American rules are universal. But I guess that's just part and parcel of being American. Fin.",
+                description: "You KNOW he deserves to be up here twice"
+            },
+            {
+                id: 5,
+                name: "Open to suggestions",
+                image: "https://via.placeholder.com/110x140",
+                votes: 30,
+                tweet: "e/acc",
+                description: "The group chat needs to expand its scope"
+            }
+        ];
+
+        const rankedChoiceVotes = [
+        { name: "Richard", votes: { DavidSacks: 1, BillAckman: 2, MarcAndressen: 3 } },
+        { name: "Jared", votes: {  DavidSacks: 1, BillAckman: 3, MarcAndressen: 2} },
+        { name: "Erlich", votes: {  DavidSacks: 1, BillAckman: 3, MarcAndressen: 2} },
+        { name: "Gilfoyle", votes: {  DavidSacks: 1, BillAckman: 3, MarcAndressen: 2 } },
+        { name: "Dinesh", votes: {  DavidSacks: 1, BillAckman: 2, MarcAndressen: 3 } },
+        { name: "Nelson", votes: {  DavidSacks: 1, BillAckman: 3, MarcAndressen: 2 } }
+    ];
+
+    function renderVotesTable(rankedChoiceVotes) {
+        const tableBody = document.querySelector('#votesTable tbody');
+        tableBody.innerHTML = '';
+
+        rankedChoiceVotes.forEach(vote => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${vote.name}</td>
+                <td>${vote.votes.DavidSacks}</td>
+                <td>${vote.votes.BillAckman}</td>
+                <td>${vote.votes.MarcAndressen}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    renderVotesTable(rankedChoiceVotes);
+
+        async function fetchRankings() {
+            try {
+                const response = await fetch('/api/rankings');
+                const rankings = await response.json();
+                renderRankings(rankings);
+            } catch (error) {
+                console.error('Error fetching rankings:', error);
+            }
+        }
+
+        function renderRankings(parasiteTargets) {
+            const rankingsElement = document.getElementById('rankings');
+            rankingsElement.innerHTML = '';
+
+            parasiteTargets.forEach(target => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <h3>${target.name}</h3>
+                        <span>Votes: ${target.votes}</span>
+                    </div>
+                    <div class="card-content">
+                        <img src="${target.image}" alt="${target.name}" class="card-image">
+                        <div class="card-details">
+                            <p>${target.description}</p>
+                            <div class="vote-buttons">
+                                <button onclick="submitVote(${target.id}, 1)" class="vote-button upvote">▲</button>
+                                <button onclick="toggleExpand(${target.id})" class="vote-button expand">↔</button>
+                                <button onclick="submitVote(${target.id}, -1)" class="vote-button downvote">▼</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" id="footer-${target.id}">
+                        <div class="tweet">${target.tweet}</div>
+                    </div>
+                `;
+                rankingsElement.appendChild(card);
+            });
+        }
+
+        function toggleExpand(id) {
+            const footer = document.getElementById(`footer-${id}`);
+            if (footer) {
+                footer.style.display = footer.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+
+        renderRankings(parasiteTargets);
+        renderVotesTable(rankedChoiceVotes);
+    </script>
+</body>
+</html>
