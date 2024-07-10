@@ -173,12 +173,14 @@
     </table>
 
     <script>
+          window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+
         const parasiteTargets = [
             {
                 id: 1,
                 name: "David Sacks",
                 image: "./ds.jpg",
-                votes: 120,
+                votes: 6,
                 tweet: "Do I even have to explain?",
                 description: "A semi-Piers Morgan- All the attention seeking None of the entertainment"
             },
@@ -186,7 +188,7 @@
                 id: 2,
                 name: "Bill Ackman",
                 image: "./ba.jpg",
-                votes: 85,
+                votes: 14,
                 tweet: "How is he so smart but can't just apply it for politics",
                 description: "Lazy screenwriter's reference for rich asshole"
             },
@@ -194,7 +196,7 @@
                 id: 3,
                 name: "Marc Andressen",
                 image: "./ma.jpg",
-                votes: 65,
+                votes: 16,
                 tweet: "WE MUST STARVE PEOPLE AND KEEP THE LIGHTS ON BECAUSE ACCELERATION",
                 description: "idk what he did but he does something every week that would put him up here"
             },
@@ -202,7 +204,7 @@
                 id: 4,
                 name: "David Sacks",
                 image: "./ds.jpg",
-                votes: 50,
+                votes: 5,
                 tweet: "I guess I'll explain: American gives opinion on something in another country without understanding how that country works as if American rules are universal. But I guess that's just part and parcel of being American. Fin.",
                 description: "You KNOW he deserves to be up here twice"
             },
@@ -210,7 +212,7 @@
                 id: 5,
                 name: "Open to suggestions",
                 image: "https://via.placeholder.com/110x140",
-                votes: 30,
+                votes: 0,
                 tweet: "e/acc",
                 description: "The group chat needs to expand its scope"
             }
@@ -218,8 +220,8 @@
 
         const rankedChoiceVotes = [
         { name: "Richard", votes: { DavidSacks: 1, BillAckman: 2, MarcAndressen: 3 } },
-        { name: "Jared", votes: {  DavidSacks: 1, BillAckman: 3, MarcAndressen: 2} },
-        { name: "Erlich", votes: {  DavidSacks: 1, BillAckman: 3, MarcAndressen: 2} },
+        { name: "Jared", votes: {  DavidSacks: 1, BillAckman: 2, MarcAndressen: 3} },
+        { name: "Erlich", votes: {  DavidSacks: 1, BillAckman: 2, MarcAndressen: 3} },
         { name: "Gilfoyle", votes: {  DavidSacks: 1, BillAckman: 3, MarcAndressen: 2 } },
         { name: "Dinesh", votes: {  DavidSacks: 1, BillAckman: 2, MarcAndressen: 3 } },
         { name: "Nelson", votes: {  DavidSacks: 1, BillAckman: 3, MarcAndressen: 2 } }
@@ -294,5 +296,6 @@
         renderRankings(parasiteTargets);
         renderVotesTable(rankedChoiceVotes);
     </script>
+    <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
