@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-adsense-account" content="ca-pub-3543779053954723">
-    <title>Parasited</title>
+    <title>Parasited and More</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
@@ -109,6 +108,9 @@
             margin-bottom: 10px;
             border: 1px solid #01cdfe;
         }
+        .ranking-section {
+            margin-bottom: 40px;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -154,34 +156,119 @@
     </style>
 </head>
 <body>
-    <h1>Most Likely to get Parasited</h1>
-    <h2>Power Rankings July</h2>
+    <h2>Tech Power Rankings July</h2>
     <div id="rankings"></div>
 
-    <h2>Ranked Choice Votes</h2>
-    <table id="votesTable">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>David Sacks</th>
-                <th>Bill Ackman</th>
-                <th>Marc Andressen</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Table rows will be added here by JavaScript -->
-        </tbody>
-    </table>
+    
+        <div class="ranking-section">
+            <h2>Most Likely to get Parasited</h2>
+            <div id="parasited-rankings"></div>
+        </div>
+    
+        <div class="ranking-section">
+            <h2>Best Vibes</h2>
+            <div id="best-vibes-rankings"></div>
+        </div>
+    
+        <div class="ranking-section">
+            <h2>Most e/acc</h2>
+            <div id="most-eacc-rankings"></div>
+        </div>
+    
+        <div class="ranking-section">
+            <h2>Worst thing</h2>
+            <div id="worst-thing-rankings"></div>
+        </div>
+    
+       
 
     <script>
-          window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+         const bestVibes = [
+            {
+                id: 1,
+                name: "The Zuck",
+                image: "mz.jpeg",
+                votes: 100,
+                tweet: "How to clean up your image in 9 days",
+                description: "Yeah that surfing video shold prove he's not a lizard person"
+            },
+            {
+                id: 2,
+                name: "Elon Musk",
+                image: "em.webp",
+                votes: 80,
+                tweet: "Tickets to Mars when?",
+                description: "Relatable because he mostly does exactly what I'd do if I was a billionaire"
+            },
+            {
+                id: 3,
+                name: "Mark Cuban",
+                image: "mk.jpg",
+                votes: 60,
+                tweet: "Shark Tank is my happy place",
+                description: "Straight-talking, approachable billionaire"
+            }
+        ];
 
+        const mostEacc = [
+            {
+                id: 1,
+                name: "Peter Thiel",
+                image: "pt.jpg",
+                votes: 90,
+                tweet: "Zero to One: accelerate everything",
+                description: "The OG of Silicon Valley acceleration"
+            },
+            {
+                id: 2,
+                name: "Sam Altman",
+                image: "sa.jpg",
+                votes: 75,
+                tweet: "AI is the future, and the future is now",
+                description: "Pushing the boundaries of AI"
+            },
+            {
+                id: 3,
+                name: "Balaji Srinivasan",
+                image: "bs.jpg",
+                votes: 70,
+                tweet: "Accelerate or be left behind",
+                description: "Crypto enthusiast and futurist"
+            }
+        ];
+
+        const worstThing = [
+            {
+                id: 1,
+                name: "Jeff Bezos",
+                image: "./jb.jpg",
+                votes: 95,
+                tweet: "Working conditions? What working conditions?",
+                description: "Amazon warehouse controversies"
+            },
+            {
+                id: 2,
+                name: "Mark Zuckerberg",
+                image: "./mz.jpeg",
+                votes: 85,
+                tweet: "Your data is our data",
+                description: "Privacy concerns and misinformation spread"
+            },
+            {
+                id: 3,
+                name: "Martin Shkreli",
+                image: "./ms.jpg",
+                votes: 75,
+                tweet: "I can price medicines however I want",
+                description: "Pharmaceutical price gouging"
+            }
+        ];
         const parasiteTargets = [
             {
                 id: 1,
                 name: "David Sacks",
                 image: "./ds.jpg",
-                votes: 6,
+                votes: 120,
                 tweet: "Do I even have to explain?",
                 description: "A semi-Piers Morgan- All the attention seeking None of the entertainment"
             },
@@ -189,7 +276,7 @@
                 id: 2,
                 name: "Bill Ackman",
                 image: "./ba.jpg",
-                votes: 14,
+                votes: 85,
                 tweet: "How is he so smart but can't just apply it for politics",
                 description: "Lazy screenwriter's reference for rich asshole"
             },
@@ -197,7 +284,7 @@
                 id: 3,
                 name: "Marc Andressen",
                 image: "./ma.jpg",
-                votes: 16,
+                votes: 65,
                 tweet: "WE MUST STARVE PEOPLE AND KEEP THE LIGHTS ON BECAUSE ACCELERATION",
                 description: "idk what he did but he does something every week that would put him up here"
             },
@@ -205,7 +292,7 @@
                 id: 4,
                 name: "David Sacks",
                 image: "./ds.jpg",
-                votes: 5,
+                votes: 50,
                 tweet: "I guess I'll explain: American gives opinion on something in another country without understanding how that country works as if American rules are universal. But I guess that's just part and parcel of being American. Fin.",
                 description: "You KNOW he deserves to be up here twice"
             },
@@ -213,90 +300,81 @@
                 id: 5,
                 name: "Open to suggestions",
                 image: "https://via.placeholder.com/110x140",
-                votes: 0,
+                votes: 30,
                 tweet: "e/acc",
                 description: "The group chat needs to expand its scope"
             }
         ];
 
-        const rankedChoiceVotes = [
-        { name: "Richard", votes: { DavidSacks: 1, BillAckman: 2, MarcAndressen: 3 } },
-        { name: "Jared", votes: {  DavidSacks: 1, BillAckman: 2, MarcAndressen: 3} },
-        { name: "Erlich", votes: {  DavidSacks: 1, BillAckman: 2, MarcAndressen: 3} },
-        { name: "Gilfoyle", votes: {  DavidSacks: 1, BillAckman: 3, MarcAndressen: 2 } },
-        { name: "Dinesh", votes: {  DavidSacks: 1, BillAckman: 2, MarcAndressen: 3 } },
-        { name: "Nelson", votes: {  DavidSacks: 1, BillAckman: 3, MarcAndressen: 2 } }
-    ];
+       
 
-    function renderVotesTable(rankedChoiceVotes) {
-        const tableBody = document.querySelector('#votesTable tbody');
-        tableBody.innerHTML = '';
+    // Keep all the existing const declarations (parasiteTargets, bestVibes, mostEacc, worstThing, rankedChoiceVotes)
 
-        rankedChoiceVotes.forEach(vote => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${vote.name}</td>
-                <td>${vote.votes.DavidSacks}</td>
-                <td>${vote.votes.BillAckman}</td>
-                <td>${vote.votes.MarcAndressen}</td>
-            `;
-            tableBody.appendChild(row);
-        });
+function renderRankings(targets, elementId) {
+    const rankingsElement = document.getElementById(elementId);
+    rankingsElement.innerHTML = '';
+
+    targets.forEach(target => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <div class="card-header">
+                <h3>${target.name}</h3>
+                <span>Votes: ${target.votes}</span>
+            </div>
+            <div class="card-content">
+                <img src="${target.image}" alt="${target.name}" class="card-image">
+                <div class="card-details">
+                    <p>${target.description}</p>
+                    <div class="vote-buttons">
+                        <button onclick="submitVote('${elementId}', ${target.id}, 1)" class="vote-button upvote">▲</button>
+                        <button onclick="toggleExpand('${elementId}', ${target.id})" class="vote-button expand">↔</button>
+                        <button onclick="submitVote('${elementId}', ${target.id}, -1)" class="vote-button downvote">▼</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer" id="footer-${elementId}-${target.id}">
+                <div class="tweet">${target.tweet}</div>
+            </div>
+        `;
+        rankingsElement.appendChild(card);
+    });
+}
+
+function toggleExpand(category, id) {
+    const footer = document.getElementById(`footer-${category}-${id}`);
+    if (footer) {
+        footer.style.display = footer.style.display === 'block' ? 'none' : 'block';
     }
+}
 
-    renderVotesTable(rankedChoiceVotes);
+function submitVote(category, id, value) {
+    // Here you would typically send the vote to a server
+    console.log(`Vote submitted for ${category}, id: ${id}, value: ${value}`);
+}
 
-        async function fetchRankings() {
-            try {
-                const response = await fetch('/api/rankings');
-                const rankings = await response.json();
-                renderRankings(rankings);
-            } catch (error) {
-                console.error('Error fetching rankings:', error);
-            }
-        }
+function renderVotesTable(rankedChoiceVotes) {
+    const tableBody = document.querySelector('#votesTable tbody');
+    tableBody.innerHTML = '';
 
-        function renderRankings(parasiteTargets) {
-            const rankingsElement = document.getElementById('rankings');
-            rankingsElement.innerHTML = '';
+    rankedChoiceVotes.forEach(vote => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${vote.name}</td>
+            <td>${vote.votes.DavidSacks}</td>
+            <td>${vote.votes.BillAckman}</td>
+            <td>${vote.votes.MarcAndressen}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
 
-            parasiteTargets.forEach(target => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div class="card-header">
-                        <h3>${target.name}</h3>
-                        <span>Votes: ${target.votes}</span>
-                    </div>
-                    <div class="card-content">
-                        <img src="${target.image}" alt="${target.name}" class="card-image">
-                        <div class="card-details">
-                            <p>${target.description}</p>
-                            <div class="vote-buttons">
-                                <button onclick="submitVote(${target.id}, 1)" class="vote-button upvote">▲</button>
-                                <button onclick="toggleExpand(${target.id})" class="vote-button expand">↔</button>
-                                <button onclick="submitVote(${target.id}, -1)" class="vote-button downvote">▼</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer" id="footer-${target.id}">
-                        <div class="tweet">${target.tweet}</div>
-                    </div>
-                `;
-                rankingsElement.appendChild(card);
-            });
-        }
-
-        function toggleExpand(id) {
-            const footer = document.getElementById(`footer-${id}`);
-            if (footer) {
-                footer.style.display = footer.style.display === 'block' ? 'none' : 'block';
-            }
-        }
-
-        renderRankings(parasiteTargets);
-        renderVotesTable(rankedChoiceVotes);
+// Render all rankings
+renderRankings(parasiteTargets, 'parasited-rankings');
+renderRankings(bestVibes, 'best-vibes-rankings');
+renderRankings(mostEacc, 'most-eacc-rankings');
+renderRankings(worstThing, 'worst-thing-rankings');
+renderVotesTable(rankedChoiceVotes);
     </script>
-    <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
